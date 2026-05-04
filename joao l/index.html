@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Béqueres - Animação de Líquidos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000000;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+            gap: 80px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 40px;
+        }
+
+        .bequer {
+            width: 240px;
+            height: 280px;
+            filter: drop-shadow(0 0 15px rgba(100, 200, 255, 0.2));
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- BÉQUER 1 - LÍQUIDO AZUL -->
+    <svg class="bequer" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <!-- Gradiente do vidro -->
+            <linearGradient id="vidro1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4"/>
+                <stop offset="30%" stop-color="#cce6ff" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="#99ccff" stop-opacity="0.3"/>
+            </linearGradient>
+            
+            <!-- Clip para o líquido -->
+            <clipPath id="corteBequer1">
+                <!-- Corpo do béquer: reto, fundo reto com leve arredondamento -->
+                <path d="M 45,45 
+                         L 48,195 
+                         Q 50,210 65,210 
+                         L 135,210 
+                         Q 150,210 152,195 
+                         L 155,45 Z"/>
+            </clipPath>
+        </defs>
+
+        <!-- Corpo principal do béquer -->
+        <path d="M 45,45 
+                 L 48,195 
+                 Q 50,210 65,210 
+                 L 135,210 
+                 Q 150,210 152,195 
+                 L 155,45" 
+              fill="url(#vidro1)" 
+              stroke="#66bbff" 
+              stroke-width="2.5" 
+              stroke-linejoin="round"/>
+
+        <!-- Borda superior (reforço do vidro) -->
+        <rect x="43" y="42" width="114" height="8" rx="3" fill="#bbddff" stroke="#66bbff" stroke-width="1.5" opacity="0.8"/>
+
+        <!-- Bico do béquer (chanfro para despejar) -->
+        <path d="M 155,45 L 168,52 L 165,58 L 155,58 Z" fill="#aaccff" stroke="#66bbff" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M 168,52 L 170,55" stroke="#66bbff" stroke-width="2" stroke-linecap="round"/>
+
+        <!-- LÍQUIDO AZUL (animação sobe e desce) -->
+        <g clip-path="url(#corteBequer1)">
+            <!-- Corpo do líquido -->
+            <rect x="40" y="60" width="120" height="160" fill="#1e88e5" opacity="0.85">
+                <animate attributeName="y" 
+                         values="60;160;160;60" 
+                         keyTimes="0;0.45;0.55;1" 
+                         dur="4s" 
+                         repeatCount="indefinite"/>
+            </rect>
+            <!-- Superfície / ondulação -->
+            <ellipse cx="100" cy="0" rx="60" ry="8" fill="#42a5f5" opacity="0.9">
+                <animate attributeName="cy"
+                         values="60;160;160;60"
+                         keyTimes="0;0.45;0.55;1"
+                         dur="4s"
+                         repeatCount="indefinite"/>
+            </ellipse>
+            <!-- Bolhas decorativas -->
+            <circle cx="75" cy="120" r="3" fill="#90d0ff" opacity="0.6">
+                <animate attributeName="cy" values="150;60" dur="2s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.6;0" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="110" cy="130" r="2" fill="#90d0ff" opacity="0.5">
+                <animate attributeName="cy" values="160;70" dur="2.5s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.5;0" dur="2.5s" repeatCount="indefinite"/>
+            </circle>
+        </g>
+
+        <!-- Reflexo lateral esquerdo -->
+        <path d="M 52,80 L 50,140 Q 49,170 52,195" stroke="#ffffff" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+        
+        <!-- Reflexo lateral direito -->
+        <path d="M 148,75 L 150,135 Q 151,165 148,190" stroke="#ffffff" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.35"/>
+    </svg>
+
+    <!-- BÉQUER 2 - LÍQUIDO VERMELHO/LARANJA -->
+    <svg class="bequer" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="vidro2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4"/>
+                <stop offset="30%" stop-color="#ffe6cc" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="#ffcc99" stop-opacity="0.3"/>
+            </linearGradient>
+            
+            <clipPath id="corteBequer2">
+                <path d="M 45,45 
+                         L 48,195 
+                         Q 50,210 65,210 
+                         L 135,210 
+                         Q 150,210 152,195 
+                         L 155,45 Z"/>
+            </clipPath>
+        </defs>
+
+        <!-- Corpo -->
+        <path d="M 45,45 
+                 L 48,195 
+                 Q 50,210 65,210 
+                 L 135,210 
+                 Q 150,210 152,195 
+                 L 155,45" 
+              fill="url(#vidro2)" 
+              stroke="#ff884d" 
+              stroke-width="2.5" 
+              stroke-linejoin="round"/>
+
+        <!-- Borda -->
+        <rect x="43" y="42" width="114" height="8" rx="3" fill="#ffddbb" stroke="#ff884d" stroke-width="1.5" opacity="0.8"/>
+
+        <!-- Bico -->
+        <path d="M 155,45 L 168,52 L 165,58 L 155,58 Z" fill="#ffccaa" stroke="#ff884d" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M 168,52 L 170,55" stroke="#ff884d" stroke-width="2" stroke-linecap="round"/>
+
+        <!-- LÍQUIDO VERMELHO (animação inversa: desce primeiro) -->
+        <g clip-path="url(#corteBequer2)">
+            <rect x="40" y="60" width="120" height="160" fill="#e63946" opacity="0.85">
+                <animate attributeName="y" 
+                         values="160;60;60;160" 
+                         keyTimes="0;0.45;0.55;1" 
+                         dur="4s" 
+                         repeatCount="indefinite"/>
+            </rect>
+            <ellipse cx="100" cy="0" rx="60" ry="8" fill="#f4a261" opacity="0.9">
+                <animate attributeName="cy"
+                         values="160;60;60;160"
+                         keyTimes="0;0.45;0.55;1"
+                         dur="4s"
+                         repeatCount="indefinite"/>
+            </ellipse>
+            <!-- Bolhas -->
+            <circle cx="80" cy="140" r="2.5" fill="#ffaa88" opacity="0.6">
+                <animate attributeName="cy" values="170;70" dur="2.2s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.6;0" dur="2.2s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="120" cy="125" r="2" fill="#ffaa88" opacity="0.5">
+                <animate attributeName="cy" values="165;75" dur="1.8s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.5;0" dur="1.8s" repeatCount="indefinite"/>
+            </circle>
+        </g>
+
+        <!-- Reflexos -->
+        <path d="M 52,80 L 50,140 Q 49,170 52,195" stroke="#ffffff" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.5"/>
+        <path d="M 148,75 L 150,135 Q 151,165 148,190" stroke="#ffffff" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.35"/>
+    </svg>
+</div>
+</body>
+</html>
